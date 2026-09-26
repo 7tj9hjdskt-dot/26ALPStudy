@@ -3,9 +3,9 @@
 #include <algorithm>
 
 
-long long getTotalQuotient(std::vector<long long>& arr, long long start, long long end, long long select)
+unsigned long long getTotalQuotient(std::vector<unsigned long long>& arr, unsigned long long start, unsigned long long end, unsigned long long select)
 {
-    long long totalQuotient = 0;
+    unsigned long long totalQuotient = 0;
 
     for(size_t i = start; i < end; i++)
     {
@@ -16,31 +16,31 @@ long long getTotalQuotient(std::vector<long long>& arr, long long start, long lo
 }
 
 
-long long findOptimalStickSize(std::vector<long long>& arr, long long start, long long end, long long m)
+unsigned long long findOptimalStickSize(std::vector<unsigned long long>& arr, unsigned long long start, unsigned long long end, unsigned long long m)
 {
-    long long mid;
-    long long totalQuotient = 0;
+    unsigned long long totalQuotient = 0;
+    unsigned long long mid_val;
+    unsigned long long max_val = arr[arr.size() - 1];
+    unsigned long long min_val = 1;
+    unsigned long long answer = 0;
 
-    while (start < end)
+    while (min_val <= max_val)
     {
-        mid = (start + end) / 2;
-        totalQuotient = getTotalQuotient(arr, start, end, arr[mid]);
+        mid_val = (min_val + max_val) / 2;
+        totalQuotient = getTotalQuotient(arr, start, end, mid_val);
 
-        if(totalQuotient > m)
+        if(totalQuotient >= m)
         {
-            start = mid;
+            answer = mid_val;
+            min_val = mid_val + 1;
         }
         else if(totalQuotient < m)
         {
-            end = mid;
-        }
-        else if(totalQuotient == m)
-        {
-            return arr[mid];
+            max_val = mid_val - 1;
         }
     }
 
-    return 0;
+    return answer;
 }
 
 
@@ -51,10 +51,10 @@ int main()
     std::cin.tie(0);
 
 
-    long long m;
-    long long n;
-    long long result;
-    std::vector<long long> arr;
+    unsigned long long m;
+    unsigned long long n;
+    unsigned long long result;
+    std::vector<unsigned long long> arr;
 
     std::cin>>m>>n;
     arr.resize(n);
@@ -70,5 +70,5 @@ int main()
     std::cout<<result<<'\n';
 
     return 0;
-    
+
 }
