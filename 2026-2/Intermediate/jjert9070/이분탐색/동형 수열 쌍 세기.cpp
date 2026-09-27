@@ -59,10 +59,12 @@ int main()
     int result;
     std::vector<std::vector<long long>> arr;
     std::vector<std::vector<long long>> arr_copy;
+    std::vector<std::vector<long long>> arr_compressed;
     std::cin>>m>>n;
 
     arr.resize(m, std::vector<long long>(n, 0));
     arr_copy.resize(m, std::vector<long long>(n, 0));
+    arr_compressed.resize(m, std::vector<long long>(n, 0));
 
 
     for(size_t i = 0; i < arr.size(); i++)
@@ -74,17 +76,28 @@ int main()
         std::copy(arr[i].begin(), arr[i].end(), arr_copy[i].begin());
         std::sort(arr_copy[i].begin(), arr_copy[i].end());
         auto it = std::unique(arr_copy[i].begin(), arr_copy[i].end());
-        arr_copy[i].erase(it, arr_copy[i].end());       
-    }
+        std::fill(it, arr_copy[i].end(), -1);
 
-
-    for(size_t i = 0; i < arr.size(); i++)
-    {
-        for(size_t j = 0; j < arr[0].size(); j++)
+        for(size_t k = 0; k < arr[i].size(); k++)
         {
-            arr_copy[i][j] = std::lower_bound(arr_copy[i].begin(), arr_copy[i].end(), arr[i][j]) - arr_copy[i].begin();
+            arr_compressed[i][k] = std::lower_bound(arr_copy[i].begin(), it, arr[i][k]) - arr_copy[i].begin();
         }
     }
+
+    int count = 0;
+
+    for(size_t i = 0; i < arr_compressed.size() - 1; i++)
+    {
+        for(size_t j = i + 1; j < arr_compressed.size(); j++)
+        {
+            if(arr_compressed[i] == arr_compressed[j])
+            {
+                count = count + 1;
+            }
+        }
+    }
+
+    std::cout<<count<<'\n';
 
     return 0;
 }
