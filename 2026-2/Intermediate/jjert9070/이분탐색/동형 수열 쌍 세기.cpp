@@ -54,6 +54,8 @@ long long countIsomorphism(std::vector<std::vector<long long>>& arr)
 
 int main()
 {
+    std::ios::sync_with_stdio(NULL);
+    std::cin.tie(0);
     int n;
     int m;
     int result;
