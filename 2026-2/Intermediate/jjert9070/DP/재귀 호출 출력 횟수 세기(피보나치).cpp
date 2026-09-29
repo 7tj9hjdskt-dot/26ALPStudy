@@ -4,31 +4,42 @@
 std::vector<int> dpZero;
 std::vector<int> dpOne;
 
-int count_print_one = 0;
-int count_print_zero = 0;
 
-int fibonacci(int n)
+void fibonacci(int n)
 {
+    dpOne[0] = 0;
+    dpOne[1] = 1;
+    dpOne[2] = 1;
+    dpZero[0] = 1;
+    dpZero[1] = 0;
+    dpZero[2] = 1;
+
+
     if(n == 0)
     {
-        count_print_zero = count_print_zero + 1;
-        return 0;
+        return;
     }
-    else if(n == 1)
+
+    if(n == 1)
     {
-        count_print_one = count_print_one + 1;
-        return 1;
+        return;
     }
 
-    if(count_print_one[n] > 0)
+    if(n == 2)
     {
-        return dp[n];
+        return;
     }
 
-    dp[n] = fibonacci(n - 1) + fibonacci(n - 2);
 
 
-    return dp[n];
+
+
+    for(size_t i = 2; i <= n; i++)
+    {
+        dpOne[i] = dpOne[i - 1] + dpOne[i - 2];
+        dpZero[i] = dpZero[i - 1] + dpZero[i - 2];
+    }
+    
 }
 
 
@@ -43,7 +54,8 @@ int main()
     int T;
     std::cin>>T;
 
-    dp.resize(100, 0);
+    dpZero.resize(100, 0);
+    dpOne.resize(100, 0);
 
     for(size_t i = 0; i < T; i++)
     {
@@ -51,9 +63,9 @@ int main()
         int result;
         std::cin>>input_;
         fibonacci(input_);
-        std::cout<<count_print_zero<<" "<<count_print_one<<'\n';
-        count_print_one = 0;
-        count_print_zero = 0;
+        std::cout<<dpZero[input_]<<" "<<dpOne[input_]<<'\n';
+        dpZero.assign(100, 0);
+        dpOne.assign(100, 0);
     }
 
 
