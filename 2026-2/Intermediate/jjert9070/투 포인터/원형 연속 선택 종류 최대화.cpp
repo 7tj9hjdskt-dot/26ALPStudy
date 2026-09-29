@@ -42,7 +42,7 @@ int main()
 {
     std::ios::sync_with_stdio(NULL);
     std::cin.tie(0);
-    
+
     int n;
     int d;
     int k;
@@ -61,7 +61,7 @@ int main()
     }
 
 
-    long long count = 0;
+    int count = 0;
     while(start < arr.size())
     {
         std::vector<int> dishes;
