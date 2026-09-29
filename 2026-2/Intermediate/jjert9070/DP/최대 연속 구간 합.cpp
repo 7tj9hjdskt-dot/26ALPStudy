@@ -5,18 +5,20 @@
 
 int main()
 {
+    std::ios::sync_with_stdio(NULL);
+    std::cin.tie(0);
     int n;
     int result;
-    int max_value = INT_MIN;
+    int final_max_value = INT_MIN;
+    int current_sum = 0;
+    int current_max = INT_MIN;
+
     std::vector<int> arr;
-    std::vector<int> dp;
     std::cin>>n;
 
     arr.resize(n + 1);
-    dp.resize(n + 1);
 
     bool flag = false;
-
 
     for(size_t i = 1; i <= n; i++)
     {
@@ -27,37 +29,19 @@ int main()
         }
     }
 
-
-    if(flag == false)
+    
+    for(size_t i = 1; i <= n; i++)
     {
-        result = *(std::max_element(arr.begin() + 1, arr.end()));
-        std::cout<<result<<'\n';
-    }
-    else
-    {
-        for(size_t i = 1; i <= n; i++)
+        current_sum = current_sum + arr[i];
+        current_sum = std::max(current_sum, arr[i]);
+
+        if(final_max_value < current_sum)
         {
-            dp[i] = arr[i];
+            final_max_value = current_sum;
         }
-
-        for(size_t windowSize = 2; windowSize <= n; windowSize++)
-        {
-            for(size_t j = 1; j <= n - (windowSize - 1); j = j + 1)
-            {
-                dp[j] = dp[j] + arr[windowSize - 1 + j];
-            }
-
-            int current_value = *(std::max_element(dp.begin() + 1, dp.end()));
-
-            if(current_value > max_value)
-            {
-                max_value = current_value;
-            }
-
-        }
-
-        std::cout<<max_value<<'\n';
     }
+
+    std::cout<<final_max_value<<'\n';
 
     return 0;
 
