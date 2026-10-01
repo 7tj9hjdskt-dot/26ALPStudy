@@ -1,11 +1,9 @@
 #include <stdio.h>
 
 main() {
-    int arr[10],n,num,M,i;
+    int arr[10]={0},n,num,M,i;
 	int SN;
     scanf("%d",&n);
-    for (i=0;i<=9;i++)
-    	arr[i]=0;
     	
     do{
         num=n%10;
