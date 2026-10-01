@@ -44,8 +44,7 @@ int main()
             dpMod[i][j] = dpMod[i - 1][j - 1] % MOD + dpMod[i - 1][j + 1] % MOD;
         }
     }
-
-
+    
     result = std::accumulate(dpMod[n].begin(), dpMod[n].end(), 0ULL);
 
     std::cout<<result % MOD <<'\n';
