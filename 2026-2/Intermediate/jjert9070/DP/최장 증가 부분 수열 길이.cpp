@@ -43,7 +43,7 @@ int main()
         }
         else
         {
-            dp[i] = *(std::max_element(container.begin(), container.end())) + 1;
+            dp[i] = *(max_element(container.begin(), container.end())) + 1;
         }
         
         container.clear();
