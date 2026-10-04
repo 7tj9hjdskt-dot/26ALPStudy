@@ -10,11 +10,12 @@ int main () {
     cin >> n;
     vector<int> arr(n);
     vector<int> result(n);
-    result[0] = 1;
 
     for (int i = 0; i < n; i++) {
         cin >> arr[i];
     }
+    result[0] = arr[0];
+
     for (int i = 1; i < n; i++) {
         int max = 0;
         for (int j = 0; j < i; j++) {
@@ -22,7 +23,7 @@ int main () {
                 max = result[j];
             }
         }
-        result[i] = max + 1;
+        result[i] = max + arr[i];
     }
 
     int max = 0;
