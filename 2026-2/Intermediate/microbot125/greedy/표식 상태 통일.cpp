@@ -34,4 +34,6 @@ int main () {
         }
     }
     cout << convert / 2 << endl;
+
+    return 0;
 }
